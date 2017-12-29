@@ -6,6 +6,11 @@ var bodyParser = require('body-parser');
 
 var book = require('./routes/book');
 var app = express();
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost/mean-angular5', { useMongoClient: true, promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
